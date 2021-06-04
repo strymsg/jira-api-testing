@@ -10,3 +10,6 @@ if __name__ == '__main__':
 
     createmeta_resp = jiraapi.createmeta()
     print(json.dumps(createmeta_resp, indent=2, sort_keys=True))
+
+    dashboards_resp = jiraapi.getalldashboards()
+    print(json.dumps(dashboards_resp, indent=2, sort_keys=True))
