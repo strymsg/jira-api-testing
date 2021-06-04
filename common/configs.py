@@ -1,6 +1,7 @@
 import os
 import json
 from json import JSONDecodeError
+import pprint
 
 class Configuration:
     def __init__(self):
@@ -18,3 +19,8 @@ class Configuration:
 
     def get_config_var(self, var_name, default_value=None):
         return self.configuration.get(var_name, default_value)
+
+#    def __str__(self):
+#        print('Configurations:')
+#        pprint.pprint(self.configuration)
+#        return str(self.configuration)
