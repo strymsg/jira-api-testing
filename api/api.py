@@ -31,11 +31,11 @@ class JiraAPI:
     def getalldashboards(self):
         ''' Get all dashboards from site '''
         print('[GET] get all dashboards')
+        url = self.site + '/rest/api/3/dashboard'
         headers_dict = {
             "Accept": "application/json"
         }
         try:
-            url = self.site + '/rest/api/3/dashboard'
             url = 'https://rmgarcia.atlassian.net/rest/api/3/dashboard'
             response = requests.get(url=url,
                                     headers=headers_dict,
@@ -46,3 +46,24 @@ class JiraAPI:
         except Exception as e:
             print('Exception occurred while doing request getalldashboards')
             print(e)
+
+    def createdashboard(self, name='TEST DASHBOARD', description="test",
+                        shared_permissions=[]):
+        print(f'[POST] create the dashboard: {name}')
+        url = self.site + "/rest/api/3/dashboard"
+        headers_dict  = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        payload = json.dumps({
+            "name": name,
+            "description": description,
+            "sharePermissions": shared_permissions
+        })
+        try:
+            response = requests.post(url, data=payload,
+                                    headers=headers_dict, auth=self.auth)
+            return json.loads(response.text)
+        except Exception as e:
+            print('Exception while creating dashboard request')
+            print(e)        
