@@ -30,7 +30,6 @@ def test_get_dashboard(jira_api_data):
     assert len(json_response.get('dashboards', [])) >= 1
 
 def test_create_dashboard(jira_api_data, now_string):
-    print(f"Now string: {now_string}")
     payload = json.dumps({
         "name": f"Test dashboard {now_string}",
         "description": "Some test description",
@@ -43,3 +42,13 @@ def test_create_dashboard(jira_api_data, now_string):
     json_response = json.loads(resp.text)
     print(json_response, type(json_response))
     assert isinstance(json_response, dict)
+
+def test_reject_create_dashbaord(jira_api_data, now_string):
+    payload = json.dumps({
+        "name": f"Test dashboard {now_string}",
+        "description": "Some test description",
+        "sharePermissions": {}
+    })
+    resp = Dashboards(jira_api_data).create(dashboard=payload)
+    assert resp != None
+    assert resp.status_code == 400
