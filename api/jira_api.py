@@ -38,12 +38,12 @@ class Dashboards:
             auth=self.jira_data.auth
         )
 
-    def create(self):
+    def create(self, dashboard={}):
         payload = json.dumps(dashboard)
-        return jira_request.do_request(
+        return jira_requestor.do_request(
             method='POST',
             url=self.jira_data.site + '/rest/api/3/dashboard',
-            headers_dict={
+            headers={
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
