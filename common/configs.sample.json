@@ -1,5 +1,5 @@
 {
   "jira-api-token": "TOKEN",
   "jira-email": "someone@somewhere.something",
-  "jira-site": "https://something.atlassian.com",
+  "jira-site": "https://something.atlassian.com"
 }

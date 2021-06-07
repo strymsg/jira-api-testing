@@ -1,13 +1,14 @@
 import json
 from datetime import datetime
 
-from common.configs import Configuration
-from api.api import JiraAPI
+from common.configuration import Configuration
+from api.jira_api import JiraApiData
 
 if __name__ == '__main__':
     print("API testing")
 
-    jiraapi = JiraAPI(Configuration().configuration)
+    print(Configuration().configuration)
+    #jiraapi = JiraAPI(Configuration().configuration)
 
     createmeta_resp = jiraapi.createmeta()
     print(json.dumps(createmeta_resp, indent=2, sort_keys=True))
