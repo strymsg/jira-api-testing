@@ -4,8 +4,11 @@ Setup:
 
 Rename `common/configs.sample.json` to `common/configs.json` and make changes to that file if neccesary.
 
-Run:
+Run tests:
 
 ```
-python3 main.py
+pytest
+
+# optionally verbose
+pytest -s
 ```

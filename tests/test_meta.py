@@ -1,4 +1,5 @@
 import pytest
+import json
 
 from common.configuration import Configuration
 from api.jira_api import JiraApiData, CreateMeta
@@ -10,11 +11,13 @@ class JiraData:
 @pytest.fixture
 def jira_api_data():
     configs = Configuration().configuration
-    print(f'configs jiradata: {configs}, type {type(configs)}')
     data = JiraApiData(configs)
     return data
 
 def test_get_create_meta(jira_api_data):
     resp = CreateMeta(jira_api_data).get()
     assert resp != None
-    print(resp.headers)
+    assert resp.status_code == 200
+
+    assert resp.headers is not None
+    assert resp.content is not None

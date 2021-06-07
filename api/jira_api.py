@@ -27,7 +27,7 @@ class CreateMeta:
             verbose=verbose
         )
          
-class GetAllDashboards:
+class Dashboards:
     def __init__(self, jira_data:JiraApiData):
         self.jira_data = jira_data
     
@@ -38,12 +38,7 @@ class GetAllDashboards:
             auth=self.jira_data.auth
         )
 
-class create_dashboard:
-    def __init__(self, jira_data:JiraApiData, dashboard={}):
-        self.jira_data = jira_data
-        self.dashboard = dashboard
-
-    def post(self, dashboard={}):
+    def create(self):
         payload = json.dumps(dashboard)
         return jira_request.do_request(
             method='POST',
