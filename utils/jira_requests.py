@@ -4,7 +4,7 @@ from utils.logger import CustomLogger
 class JiraRequestor:
     def __init__(self):
         self.logger = CustomLogger(__name__)
-
+    
     def do_request(self, method='GET', url='', headers={"Accept": "application/json"}, \
                     body='', auth=None, \
                     timeout=45, verbose=False):
