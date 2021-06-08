@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from api.dashboards import Dashboards
+from common.payloads import DASHBOARDS
 
 
 def test_get_dashboards():
@@ -15,12 +16,7 @@ def test_get_dashboards():
     assert len(json_response.get('dashboards', [])) >= 1
 
 def test_create_dashboard():
-    payload = {
-        "name": f"Test dashboard {datetime.now()}",
-        "description": "Some test description",
-        "sharePermissions": []
-    }
-    resp = Dashboards().create(dashboard=payload)
+    resp = Dashboards().create(dashboard=DASHBOARDS['CREATE_OK'])
     assert resp is not None
     assert resp.status_code == 200
 
@@ -30,11 +26,6 @@ def test_create_dashboard():
 
 
 def test_reject_create_dashbaord():
-    payload = {
-        "name": f"Test dashboard {datetime.now()}",
-        "description": "Some test description",
-        "sharePermissions": {}
-    }
-    resp = Dashboards().create(dashboard=payload)
+    resp = Dashboards().create(dashboard=DASHBOARDS['CREATE_FAIL_1'])
     assert resp is not None
     assert resp.status_code == 400
