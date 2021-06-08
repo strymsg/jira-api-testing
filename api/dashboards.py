@@ -1,54 +1,35 @@
-import requests
+"""Dashboards endpoint for the Jira API."""
+
+from api.jira_api_data import JiraApiData
 import json
-from requests.auth import HTTPBasicAuth
+from utils.jira_requestor import JiraRequestor
 
-from utils.logger import CustomLogger
-from utils.jira_requests import JiraRequestor
 
-jira_requestor = JiraRequestor()
-
-class JiraApiData:
-    def __init__(self, configs={}):
-        self.api_token = configs['jira-api-token']
-        self.email = configs['jira-email']
-        self.site = configs['jira-site']
-
-        self.auth = HTTPBasicAuth(self.email, self.api_token)
-
-class CreateMeta:
-    def __init__(self, jira_data:JiraApiData):
-        self.jira_data = jira_data
-
-    def get(self, verbose=False):
-        return jira_requestor.do_request(
-            method='GET',
-            url=self.jira_data.site + '/rest/api/2/issue/createmeta',
-            auth=self.jira_data.auth,
-            verbose=verbose
-        )
-         
 class Dashboards:
-    def __init__(self, jira_data:JiraApiData):
-        self.jira_data = jira_data
+    """Dashboard endpint for the Jira API."""
+
+    def __init__(self):
+        self.jira_requestor = JiraRequestor()
+        self.jira_data = JiraApiData.get()
     
     def get(self):
-        return jira_requestor.do_request(
+        return self.jira_requestor.do_request(
             method='GET',
-            url=self.jira_data.site + '/rest/api/3/dashboard',
-            auth=self.jira_data.auth
+            url=self.jira_data['site'] + '/rest/api/3/dashboard',
+            auth=self.jira_data['auth']
         )
 
     def create(self, dashboard={}):
         payload = json.dumps(dashboard)
-        return jira_requestor.do_request(
+        return self.jira_requestor.do_request(
             method='POST',
-            url=self.jira_data.site + '/rest/api/3/dashboard',
+            url=self.jira_data['site'] + '/rest/api/3/dashboard',
             headers={
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body=dashboard,
-            auth=self.jira_data.auth
+            body=payload,
+            auth=self.jira_data['auth']
         )
 
 

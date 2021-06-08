@@ -11,6 +11,8 @@ help:
 	@echo "       prepare development environment, udse only once"
 	@echo "make test"
 	@echo "       run tests"
+	@echo "make test-verbose"
+	@echo "       run tests with print to stdout enabled"
 	@echo "make lint"
 	@echo "       run pylint and mypy"
 	@echo "make run"
@@ -33,6 +35,9 @@ $(VENV_NAME)/bin/activate: setup.py
 
 test: venv
 	${PYTHON} -m pytest
+
+test-debug: venv
+	${PYTHON} -m pytest -s
 
 # Notice the "-" character tells make to ignore errors from command given
 lint: venv
