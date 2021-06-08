@@ -6,5 +6,6 @@ JIRA_ENDPOINTS = {
     'DASHBOARD': {
         'GET': '/rest/api/3/dashboard',
         'CREATE': '/rest/api/3/dashboard',
+        'DELETE': '/rest/api/3/dashboard/',
     },
 }

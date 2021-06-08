@@ -31,3 +31,12 @@ class Dashboards:
             body=payload,
             auth=self.jira_data['auth']
         )
+
+    def delete(self, dashboard_id):
+        url = self.jira_data['site'] + JIRA_ENDPOINTS['DASHBOARD']['DELETE']
+        url += dashboard_id
+        return self.jira_requestor.do_request(
+            method='DELETE',
+            url=url,
+            auth=self.jira_data['auth']
+        )
