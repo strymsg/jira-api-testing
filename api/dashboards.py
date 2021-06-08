@@ -3,7 +3,7 @@
 from api.jira_api_data import JiraApiData
 import json
 from utils.jira_requestor import JiraRequestor
-
+from common.constants import JIRA_ENDPOINTS
 
 class Dashboards:
     """Dashboard endpint for the Jira API."""
@@ -15,7 +15,7 @@ class Dashboards:
     def get(self):
         return self.jira_requestor.do_request(
             method='GET',
-            url=self.jira_data['site'] + '/rest/api/3/dashboard',
+            url=self.jira_data['site'] + JIRA_ENDPOINTS['DASHBOARD']['GET'],
             auth=self.jira_data['auth']
         )
 
@@ -23,7 +23,7 @@ class Dashboards:
         payload = json.dumps(dashboard)
         return self.jira_requestor.do_request(
             method='POST',
-            url=self.jira_data['site'] + '/rest/api/3/dashboard',
+            url=self.jira_data['site'] + JIRA_ENDPOINTS['DASHBOARD']['GET'],
             headers={
                 "Accept": "application/json",
                 "Content-Type": "application/json"
